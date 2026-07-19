@@ -1,12 +1,27 @@
 import Fastify from 'fastify';
+import { prisma } from './db/prisma.js';
 
 const fastify = Fastify({
   logger: false,
 });
 
-fastify.get('/health', async () => ({
-  status: 'ok',
-}));
+fastify.get('/health', async (request, reply) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+
+    return {
+      status: 'ok',
+      database: 'connected',
+    };
+  } catch (error) {
+    reply.code(503);
+
+    return {
+      status: 'error',
+      message: 'Database unavailable',
+    };
+  }
+});
 
 const start = async () => {
   try {

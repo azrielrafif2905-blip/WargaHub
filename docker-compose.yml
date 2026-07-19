@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: wargahub-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wargahub
+      POSTGRES_USER: wargahub
+      POSTGRES_PASSWORD: development_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - wargahub-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  wargahub-postgres-data:
