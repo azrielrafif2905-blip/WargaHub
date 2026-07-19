@@ -1,3 +1,5 @@
+import { Badge, Button, Card, Input } from '@wargahub/ui';
+
 const highlights = ['Pengumuman', 'Surat', 'Iuran', 'Pengaduan'];
 
 export default function App() {
@@ -11,18 +13,31 @@ export default function App() {
           jelas, dan terhubung.
         </p>
 
-        <section className="card" aria-label="Fitur utama">
-          <h2>Mulai dengan WargaHub</h2>
-          <p>
-            Aplikasi ini menjadi fondasi awal untuk pengalaman digital komunitas yang
-            aman, informatif, dan ramah pengguna.
-          </p>
-          <ul>
+        <div className="actions" role="group" aria-label="Aksi utama">
+          <Button variant="primary">Jelajahi WargaHub</Button>
+          <Button variant="secondary">Lihat Fitur</Button>
+        </div>
+
+        <Card
+          title="Mulai dengan WargaHub"
+          description="Aplikasi ini menjadi fondasi awal untuk pengalaman digital komunitas yang aman, informatif, dan ramah pengguna."
+          className="feature-card"
+        >
+          <div className="badge-row" aria-label="Fitur utama">
             {highlights.map((item) => (
-              <li key={item}>{item}</li>
+              <Badge key={item} variant="success">
+                {item}
+              </Badge>
             ))}
-          </ul>
-        </section>
+          </div>
+
+          <div className="form-card">
+            <Input label="Nama lingkungan" placeholder="Contoh: RT 03" />
+            <Button variant="ghost" className="inline-action">
+              Hubungi Admin
+            </Button>
+          </div>
+        </Card>
       </main>
     </div>
   );
